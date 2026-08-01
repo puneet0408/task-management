@@ -1,0 +1,50 @@
+.custom-table-wrapper {
+  height: 350px;
+  overflow-y: auto;   // ✅ scroll here
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; // ✅ important for alignment
+  font-size: 14px;
+  color: #374151;
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #f8fafc;
+    z-index: 5;
+    padding: 12px 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f9fafb;
+    }
+
+    &:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+
+  .no-data {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+  }
+}

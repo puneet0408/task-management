@@ -1,0 +1,58 @@
+.app-sidebar {
+  width: 190px;
+  height: 100vh;
+  background: var(--primary);
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 20px 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.25);
+}
+.sidebar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.change-project {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 12px;
+  cursor: pointer;
+}
+.change-project:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

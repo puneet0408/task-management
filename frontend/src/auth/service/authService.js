@@ -1,0 +1,282 @@
+import axios from "axios";
+import apiConfig from "../config/apiConfig";
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+export default class AuthService {
+  getToken() {
+    return getCookie("accessToken");
+  }
+
+  constructor() {
+    axios.interceptors.request.use((config) => {
+      const token = this.getToken();
+      if (token) config.headers["x-access-token"] = token;
+      return config;
+    });
+  }
+
+  login(data) {
+    return axios.post(apiConfig.login, data, { withCredentials: true });
+  }
+
+  logout() {
+    return axios.post(apiConfig.logout, null, {
+      withCredentials: true,
+    });
+  }
+  refreshToken() {
+    return axios.post(apiConfig.refreshtokkenEndpoint, {
+      withCredentials: true,
+    });
+  }
+
+  getProfile(uuid) {
+    return axios.get(`${apiConfig.curdUsersEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+
+  getCompany(params = {}) {
+    return axios.get(apiConfig.curdCompanyEndpoint, {
+      params,
+      withCredentials: true,
+    });
+  }
+
+  PostCompany(data) {
+    return axios.post(apiConfig.curdCompanyEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  editCompanyData(data, uuid) {
+    return axios.patch(`${apiConfig.curdCompanyEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteCompanyData(uuid) {
+    return axios.delete(`${apiConfig.curdCompanyEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+
+  getUsers(params = {}) {
+    return axios.get(apiConfig.curdUsersEndpoint, {
+      params,
+      withCredentials: true,
+    });
+  }
+  getAllUsers(params = {}) {
+    return axios.get(apiConfig.getallUser, {
+      params,
+      withCredentials: true,
+    });
+  }
+
+  PostUSers(data) {
+    return axios.post(apiConfig.curdUsersEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  editUsers(data, uuid) {
+    return axios.patch(`${apiConfig.curdUsersEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteUsers(uuid) {
+    return axios.delete(`${apiConfig.curdUsersEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  setuserPassword(data, token) {
+    return axios.patch(
+      `${apiConfig.setPasswordEndpoint}/${token}`,
+      { password: data },
+      { withCredentials: true }
+    );
+  }
+  getProject(params = {}) {
+    return axios.get(apiConfig.curdProjectEndpoint, {
+      params,
+      withCredentials: true,
+    });
+  }
+  PostProject(data) {
+    return axios.post(apiConfig.curdProjectEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  editProject(data, uuid) {
+    return axios.patch(`${apiConfig.curdProjectEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteProject(uuid) {
+    return axios.delete(`${apiConfig.curdProjectEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  getSprint(params = {}) {
+    return axios.get(apiConfig.curdSprintEndpoint, {
+      params,
+      withCredentials: true,
+    });
+  }
+  PostSprint(data) {
+    return axios.post(apiConfig.curdSprintEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  editSprint(data, uuid) {
+    return axios.patch(`${apiConfig.curdSprintEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteSprint(uuid) {
+    return axios.delete(`${apiConfig.curdSprintEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  MarkDefultProject(uuid) {
+    return axios.patch(`${apiConfig.markdefaultProject}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  MarkDefultSprint(uuid) {
+    return axios.patch(`${apiConfig.markdefaultSprint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  MarkLastPreferenceProject(uuid) {
+    return axios.patch(`${apiConfig.markLastPreferenceProject}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  gettask(params = {}, signal) {
+    return axios.get(apiConfig.curdTaskEndpoint, {
+      params,
+      withCredentials: true,
+      signal,
+    });
+  }
+  createTask(data) {
+    return axios.post(apiConfig.curdTaskEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  updateTask(uuid, data) {
+    return axios.patch(`${apiConfig.curdTaskEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  Deletetask(uuid) {
+    return axios.delete(`${apiConfig.curdTaskEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+    getdeletedtask(params = {}, signal) {
+    return axios.get(apiConfig.getdeletedTaskEndpoint, {
+      params,
+      withCredentials: true,
+      signal,
+    });
+  }
+  gettagsApi(params = {}) {
+    return axios.get(apiConfig.curdTagEndpoint, {
+      params,
+      withCredentials: true,
+    });
+  }
+  createTag(data) {
+    return axios.post(apiConfig.curdTagEndpoint, data, {
+      withCredentials: true,
+    });
+  }
+  editTag(data, uuid) {
+    return axios.patch(`${apiConfig.curdTagEndpoint}/${uuid}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteTag(uuid) {
+    return axios.delete(`${apiConfig.curdTagEndpoint}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  getkanbancolumn(params = {}) {
+    return axios.get(apiConfig.curdkanbanTaskColumn, {
+      params,
+      withCredentials: true,
+    });
+  }
+  createKanbanColumn(data) {
+    return axios.post(apiConfig.curdkanbanTaskColumn, data, {
+      withCredentials: true,
+    });
+  }
+  editKanbanColumn(data) {
+    return axios.patch(`${apiConfig.curdkanbanTaskColumn}`, data, {
+      withCredentials: true,
+    });
+  }
+  DeleteKanbanColumn(uuid) {
+    return axios.delete(`${apiConfig.curdkanbanTaskColumn}/${uuid}`, {
+      withCredentials: true,
+    });
+  }
+  awsmediaupoader(data) {
+    return axios.post(`${apiConfig.mediauploaderaws}`, data, {
+      withCredentials: true,
+    });
+  }
+
+  getPresignedViewUrl({ key }) {
+    return axios.get(`${apiConfig.mediauploaderaws}/${key}`, {
+      withCredentials: true,
+    });
+  }
+
+  createTaskActivity(data) {
+    return axios.post(apiConfig.taskActivityEndpont, data, {
+      withCredentials: true,
+    });
+  }
+
+  getTaskActivity(params = {}) {
+    return axios.get(apiConfig.taskActivityEndpont, {
+      params,
+      withCredentials: true,
+    });
+  }
+  dashboardempSummaryWidget(params = {}) {
+    console.log(params, "params");
+    return axios.get(apiConfig.dashboardempSummaryWidget, {
+      params,
+      withCredentials: true,
+    });
+  }
+  dashboardadminSummaryWidget(params = {}) {
+    console.log(params, "params");
+    return axios.get(apiConfig.dashboardadminSummaryWidget, {
+      params,
+      withCredentials: true,
+    });
+  }
+  getNotification() {
+    return axios.get(apiConfig.notificationEndpoint, {
+      withCredentials: true,
+    });
+  }
+  readNotification(params = {}) {
+    let notificationId = params;
+    console.log(notificationId,"notificationId");
+    
+    return axios.patch(apiConfig.readnotificationEndpoint, {
+      notificationId,
+      withCredentials: true,
+    });
+  }
+}
