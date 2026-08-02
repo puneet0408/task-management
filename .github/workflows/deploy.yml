@@ -55,3 +55,15 @@ jobs:
         run: |
           docker push \
           ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/task-management-frontend:latest
+
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Connected Successfully"
+            whoami
+            pwd
+            docker --version
