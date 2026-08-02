@@ -63,7 +63,10 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "Connected Successfully"
-            whoami
-            pwd
-            docker --version
+            cd /home/ubuntu/task-management
+
+            docker compose pull
+
+            docker compose up -d
+
+            docker image prune -f
