@@ -238,7 +238,7 @@ export const postUsers = async (req, res) => {
     fetchusers.resetPasswordToken = hashedToken;
     fetchusers.resetPasswordExpire = Date.now() + 24 * 60 * 60 * 1000;
     await fetchusers.save();
-    const resetLink = `http://localhost:5173/createpassword/${token}`;
+    const resetLink = `${window.location.hostname}/createpassword/${token}`;
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
