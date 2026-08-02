@@ -23,3 +23,35 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Backend Image
+        run: |
+          docker build \
+            -t task-management-backend \
+            ./backend
+
+      - name: Tag Backend Image
+        run: |
+          docker tag task-management-backend:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/task-management-backend:latest
+
+      - name: Push Backend Image
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/task-management-backend:latest
+
+      - name: Build Frontend Image
+        run: |
+          docker build \
+            -t task-management-frontend \
+            ./frontend
+
+      - name: Tag Frontend Image
+        run: |
+          docker tag task-management-frontend:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/task-management-frontend:latest
+
+      - name: Push Frontend Image
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/task-management-frontend:latest
