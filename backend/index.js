@@ -45,5 +45,17 @@ next();
  App.use("/auth/vi/dashboard",dashboardRoutes);
  App.use("/auth/vi/notification",NotificationRoutes)
  
+ App.get("/", (req, res) => {
+  res.send("Task Management Backend is running 🚀");
+});
+
+App.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Backend is healthy",
+    timestamp: new Date().toISOString(),
+  });
+});
+ 
 
 export  default App;
