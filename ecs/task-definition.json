@@ -1,0 +1,81 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "Main",
+      "image": "396288591512.dkr.ecr.ap-south-1.amazonaws.com/task-management-backend:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 3009,
+          "hostPort": 3009,
+          "protocol": "tcp",
+          "name": "main-3009-tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "ACCESS_TOKEN_TIME",
+          "value": "15m"
+        },
+        {
+          "name": "AWS_REGION",
+          "value": "ap-south-1"
+        },
+        {
+          "name": "PORT",
+          "value": "3009"
+        },
+        {
+          "name": "AWS_BUCKET_NAME",
+          "value": "task-attach-file"
+        },
+        {
+          "name": "REFRESH_TOKEN_TIME",
+          "value": "7d"
+        },
+        {
+          "name": "MAX_AGE",
+          "value": "7"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "SALT_ROUND",
+          "value": "10"
+        }
+      ],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/task-management-backend",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    }
+  ],
+  "family": "task-management-backend",
+  "executionRoleArn": "arn:aws:iam::396288591512:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "enableFaultInjection": false
+}
