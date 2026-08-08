@@ -46,6 +46,10 @@
         {
           "name": "SALT_ROUND",
           "value": "10"
+        },
+        {
+          "name": "EMAIL_USER",
+          "value": "punitvirmani725@gmail.com"
         }
       ],
       "environmentFiles": [],
