@@ -71,6 +71,7 @@
   ],
   "family": "task-management-backend",
   "executionRoleArn": "arn:aws:iam::396288591512:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::396288591512:role/task-management-backend-role",
   "networkMode": "awsvpc",
   "volumes": [],
   "placementConstraints": [],
