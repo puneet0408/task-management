@@ -4,7 +4,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { PutObjectCommand, S3Client  , GetObjectCommand} from "@aws-sdk/client-s3";
 // local 
 // const client = new S3Client({
-//   region: process.env.AWS_REGION || "ap-south-1",
+//    region: "eu-north-1",
 //   credentials: {
 //     accessKeyId: String(process.env.AWS_ACCESS_KEY_ID).trim(),
 //     secretAccessKey: String(process.env.AWS_SECRET_ACCESS_KEY).trim(),
@@ -12,9 +12,9 @@ import { PutObjectCommand, S3Client  , GetObjectCommand} from "@aws-sdk/client-s
 //   requestChecksumCalculation: "WHEN_REQUIRED",
 //   responseChecksumValidation: "WHEN_REQUIRED",
 // });
-// for production -----------
+// for production
 const client = new S3Client({
-  region: process.env.AWS_REGION || "ap-south-1",
+  region: "eu-north-1",
   requestChecksumCalculation: "WHEN_REQUIRED",
   responseChecksumValidation: "WHEN_REQUIRED",
 });
