@@ -52,6 +52,32 @@
           "value": "punitvirmani725@gmail.com"
         }
       ],
+      "secrets": [
+        {
+          "name": "ACCESS_SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:ACCESS_SECRET_KEY::"
+        },
+        {
+          "name": "REFRESH_SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:REFRESH_SECRET_KEY::"
+        },
+        {
+          "name": "CON_STR",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:CON_STR::"
+        },
+        {
+          "name": "USERNAME",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:USERNAME::"
+        },
+        {
+          "name": "dbpassword",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:dbpassword::"
+        },
+        {
+          "name": "EMAIL_PASS",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:396288591512:secret:PROD_-fAQ5Nr:EMAIL_PASS::"
+        }
+      ],
       "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
