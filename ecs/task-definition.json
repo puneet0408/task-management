@@ -46,6 +46,18 @@
         {
           "name": "SALT_ROUND",
           "value": "10"
+        },
+        {
+          "name": "ACCESS_SECRET_KEY",
+          "value": "dasdasdqweqweioqwuxzczxczxvxvzx"
+        },
+        {
+          "name": "REFRESH_SECRET_KEY",
+          "value": "adasdaksdkalsjqwiojdqwkljeoiqwijfrwrwqwrqasfasa"
+        },
+        {
+          "name": "EMAIL_USER",
+          "value": "punitvirmani725@gmail.com"
         }
       ],
       "environmentFiles": [],
