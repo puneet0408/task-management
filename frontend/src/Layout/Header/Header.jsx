@@ -198,23 +198,35 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!currentUser?._id) return;
-    if (!socket.connected) {
-      socket.connect();
-    }
-    socket.emit("joinRoom", currentUser._id);
-  }, [currentUser]);
-
-  useEffect(() => {
-    socket.on("newNotification", (notification) => {
+    const handleNotification = (notification) => {
       setNotifications((prev) => [notification, ...prev]);
-    });
+    };
+
+    socket.on("newNotification", handleNotification);
 
     return () => {
-      socket.off("newNotification");
+      socket.off("newNotification", handleNotification);
     };
   }, []);
 
+  useEffect(() => {
+    if (!currentUser?._id) return;
+
+    const joinRoom = () => {
+      socket.emit("joinRoom", currentUser._id);
+    };
+
+    if (socket.connected) {
+      joinRoom();
+    } else {
+      socket.once("connect", joinRoom);
+      socket.connect();
+    }
+
+    return () => {
+      socket.off("connect", joinRoom);
+    };
+  }, [currentUser?._id]);
   const handleLogout = async () => {
     try {
       await api.logout();
