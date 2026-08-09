@@ -14,7 +14,7 @@ import { PutObjectCommand, S3Client  , GetObjectCommand} from "@aws-sdk/client-s
 // });
 // for production
 const client = new S3Client({
-  region: process.env.AWS_REGION || "eu-north-1",
+  region: "eu-north-1",
   requestChecksumCalculation: "WHEN_REQUIRED",
   responseChecksumValidation: "WHEN_REQUIRED",
 });
@@ -45,7 +45,7 @@ export const createPresignedUrlWithClient = async (req, res) => {
     return res.status(200).json({
       success: true,
       uploadUrl: url,
-      fileUrl: `https://${bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`,
+      fileUrl: `https://${bucket}.s3.eu-north-1.amazonaws.com/${key}`,
     });
   } catch (error) {
     console.error("S3 Error:", error);

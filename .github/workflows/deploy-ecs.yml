@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AWS_REGION: eu-north-1
+      AWS_REGION: ap-south-1
       ECR_REPOSITORY: task-management-backend
       ECS_SERVICE: backend-service
       ECS_CLUSTER: task-management-cluster
