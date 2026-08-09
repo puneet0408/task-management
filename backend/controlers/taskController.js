@@ -296,7 +296,6 @@ export const createTask = async (req, res) => {
         }
       }
     }
-    return;
     const task = await TaskModel.create(payload);
     if (task.assignedTo) {
       const notification = await NotificationModel.create({
