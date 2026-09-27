@@ -93,13 +93,14 @@ export default function Login() {
         <h4 className="login-title">Welcome Back! 👋</h4>
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* EMAIL */}
-          <label className="input-label">Email</label>
+          <label  htmlFor="email" className="input-label">Email</label>
           <Controller
             name="email"
             control={control}
             render={({ field }) => (
               <input
                 {...field}
+                id="email"
                 type="email"
                 disabled={loading}
                 className="custom-input"
@@ -111,10 +112,10 @@ export default function Login() {
             <span className="error-text">{errors.email.message}</span>
           )}
           <div className="label-row">
-            <label className="input-label">Password</label>
-            <a href="#" className="forgot-link">
+            <label htmlFor="password" className="input-label">Password</label>
+            {/* <a href="#" className="forgot-link">
               Forgot Password?
-            </a>
+            </a> */}
           </div>
           <div className="password-wrapper">
             <Controller
@@ -123,6 +124,7 @@ export default function Login() {
               render={({ field }) => (
                 <input
                   {...field}
+                  id="password"
                   disabled={loading}
                   type={showPassword ? "text" : "password"}
                   className="custom-input"

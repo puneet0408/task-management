@@ -3,26 +3,32 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   server: {
+    host: "0.0.0.0",
+
     cors: {
-      origin: "*", 
-        methods: ["GET", "PATCH", "PUT", "POST", "DELETE", "OPTIONS"],
-        allowedHeaders: [
-          "Content-Type",
-          "Authorization",
-          "X-Requested-With",
-          "x-access-token",
-          "activity-type",
-        ],
-      credentials: true
+      origin: "*",
+      methods: ["GET", "PATCH", "PUT", "POST", "DELETE", "OPTIONS"],
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "x-access-token",
+        "activity-type",
+      ],
+      credentials: true,
     },
+
+    watch: {
+      usePolling: true,
+    },
+
     proxy: {
       "/api": {
-        target: "http://localhost:3009",
+        target: "http://backend:3009",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
-
   },
 
   plugins: [
@@ -32,4 +38,10 @@ export default defineConfig({
       },
     }),
   ],
+
+  test: {
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.js",
+    globals: true,
+  },
 });

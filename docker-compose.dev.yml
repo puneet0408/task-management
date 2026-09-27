@@ -1,0 +1,63 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: task-backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/config.env
+    ports:
+      - "3009:3009"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - task-network
+  
+  redis:
+    image: redis:latest
+    container_name: task-redis
+    restart: unless-stopped
+    networks:
+      - task-network
+
+  notification-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: task-notification-worker
+    restart: unless-stopped
+    env_file:
+      - ./backend/config.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: node workers/notification.worker.js
+    depends_on:
+      - redis
+    networks:
+      - task-network
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: task-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - task-network
+
+networks:
+  task-network:
+    driver: bridge
+    

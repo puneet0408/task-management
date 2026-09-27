@@ -13,7 +13,7 @@ export default function Layout() {
         style={{
           marginLeft: 190,
           marginTop: 90,
-          padding: 20
+          padding: 20 
         }}
       >
         <Outlet />   {/* CHILD ROUTES SHOW HERE */}
